@@ -4,6 +4,8 @@ const https = require("https");
 const path = require("path");
 const fs = require("fs");
 const WebSocket = require("ws");
+const NodeMediaServer = require("node-media-server");
+const ffmpeg = require("ffmpeg");
 
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
@@ -16,7 +18,7 @@ const normalizePort = (val) => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || "4000");
+const port = normalizePort(process.env.PORT || "8084");
 app.set("port", port);
 
 const errorHandler = (error) => {
@@ -37,26 +39,29 @@ const errorHandler = (error) => {
   }
 };
 
-const server = http.createServer(app);
+//HTTP Server
 
-server.on("error", errorHandler);
-server.on("listening", () => {
-  const address = server.address();
+const HttpServer = http.createServer(app);
+
+HttpServer.on("error", errorHandler);
+HttpServer.on("listening", () => {
+  const address = HttpServer.address();
   const bind = typeof address === "string" ? "pipe " + address : "port " + port;
   console.log("Listening on " + bind);
 });
 
-server.listen(port);
+HttpServer.listen(port);
 
-//const keyPath = "/opt/psa/var/modules/letsencrypt/etc/archive/minidev.fr/privkey1.pem";
-//const certPath = "/opt/psa/var/modules/letsencrypt/etc/archive/minidev.fr/fullchain1.pem";
+//HTTPS Server
 
-//const sslServer = https.createServer({ key: fs.readFileSync(keyPath), cert: fs.readFileSync(certPath) }, app);
+const keyPath = "/etc/letsencrypt/archive/zionsound.fr/privkey1.pem";
+const certPath = "/etc/letsencrypt/archive/zionsound.fr/cert1.pem";
 
-//sslServer.listen(4443, () => console.log("Ssl server listening 4443"));
+const sslServer = https.createServer({ key: fs.readFileSync(keyPath), cert: fs.readFileSync(certPath) }, app);
 
-const NodeMediaServer = require("node-media-server");
-const ffmpeg = require("ffmpeg");
+sslServer.listen(8086, () => console.log("Ssl server listening 8086"));
+
+//Node Media Server
 
 const config = {
   logType: 3,
@@ -113,18 +118,6 @@ const config = {
         rule: "live/*",
         model: [
           {
-            ab: "128k",
-            vb: "1500k",
-            vs: "1280x720",
-            vf: "30",
-          },
-          {
-            ab: "96k",
-            vb: "1000k",
-            vs: "854x480",
-            vf: "30",
-          },
-          {
             ab: "96k",
             vb: "600k",
             vs: "640x360",
@@ -138,14 +131,6 @@ const config = {
 
 let nms = new NodeMediaServer(config);
 nms.run();
-
-const wss = new WebSocket.Server({ port: 8083 });
-
-let liveStreamIsActive = false;
-
-app.get("/live-stream-status", (req, res) => {
-  res.send({ isLiveStreamActive: liveStreamIsActive });
-});
 
 // Méthode postPublish
 nms.on("postPublish", (id, StreamPath, args) => {
@@ -171,6 +156,18 @@ nms.on("donePublish", (id, StreamPath, args) => {
       client.send(JSON.stringify({ isLiveStreamActive: liveStreamIsActive }));
     }
   });
+});
+
+//Websocket Server
+
+const server = https.createServer({ key: fs.readFileSync(keyPath), cert: fs.readFileSync(certPath) }, app);
+const wss = new WebSocket.Server({ server: server });
+server.listen(8085, () => console.log("WSHTTPSserver is running on port 8085"));
+
+let liveStreamIsActive = false;
+
+app.get("/live-stream-status", (req, res) => {
+  res.send({ isLiveStreamActive: liveStreamIsActive });
 });
 
 // Gérer les connexions WebSocket entrantes
