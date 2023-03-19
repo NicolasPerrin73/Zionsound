@@ -1,8 +1,15 @@
 header {
   background: linear-gradient(green, yellow, black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 300px;
+  width: 100%;
 }
 
 #zionLogo {
-  width: 160px;
+  height: 140px;
   padding: 10px;
+  align-self: center;
 }

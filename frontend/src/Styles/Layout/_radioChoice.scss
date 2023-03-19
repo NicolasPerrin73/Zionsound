@@ -1,0 +1,50 @@
+.radioChoice {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  & i {
+    font-size: 48px;
+    padding: 20px;
+  }
+}
+
+.collection {
+  display: flex;
+  position: relative;
+  height: 80%;
+  width: 390px;
+  gap: 10px;
+
+  & img {
+    height: 100%;
+  }
+
+  &__zionSleeve {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    z-index: 1;
+  }
+
+  &__dubatekSleeve {
+    position: absolute;
+    top: 0;
+    right: 180px;
+    transform: scale(0.8);
+  }
+
+  &__zionRecord {
+    position: absolute;
+    left: 30px;
+
+    &--out {
+      animation: recordOutofSleeve 500ms ease-in-out both;
+    }
+  }
+
+  &__dubatekRecord {
+    position: absolute;
+    z-index: -1;
+  }
+}

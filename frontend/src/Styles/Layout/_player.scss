@@ -1,0 +1,67 @@
+.player {
+  position: relative;
+  margin: 0px;
+  height: 250px;
+  min-width: 320px;
+  margin-right: 5px;
+  margin-top: 5px;
+  overflow: hidden;
+
+  &__turntable {
+    position: relative;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  &__armBase {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    height: 100%;
+  }
+
+  &__plate {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    height: 93%;
+  }
+
+  &__arm {
+    position: absolute;
+    top: 15px;
+    right: 4px;
+    height: 80%;
+    transform-origin: 76% 21%;
+    transform: rotate(-20deg);
+
+    & img {
+      height: 100%;
+    }
+
+    & span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: scale(0.001);
+      transform-origin: inherit;
+    }
+    & span::after {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background: rgba(255, 128, 128);
+      transform: scale(1000);
+    }
+  }
+
+  &__pivot {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    z-index: 2;
+  }
+}
