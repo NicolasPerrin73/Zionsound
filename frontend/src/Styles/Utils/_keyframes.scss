@@ -1,8 +1,89 @@
+@keyframes recordAppear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes recordOutofSleeve {
   0% {
-    transform: translate(0px);
+    transform: translate(35px);
   }
   100% {
     transform: translateX(160px);
+  }
+}
+
+@keyframes frontSleeveBackward {
+  0% {
+    transform: translateX(0px) scale(0.8);
+    z-index: 0;
+  }
+  50% {
+    transform: translateX(110px) scale(0.8);
+    z-index: 0;
+  }
+  75% {
+    z-index: 1;
+  }
+  100% {
+    transform: translateX(70px) scale(1);
+    z-index: 1;
+  }
+}
+
+@keyframes frontSleeveForward {
+  0% {
+    transform: translateX(0px) scale(0.8);
+    z-index: 0;
+  }
+  50% {
+    transform: translateX(-110px) scale(0.8);
+    z-index: 0;
+  }
+  75% {
+    z-index: 1;
+  }
+  100% {
+    transform: translateX(70px) scale(1);
+    z-index: 1;
+  }
+}
+
+@keyframes backSleeveBackward {
+  0% {
+    transform: translateX(70px) scale(1);
+    z-index: 1;
+  }
+  50% {
+    transform: translateX(-110px) scale(0.8);
+    z-index: 1;
+  }
+  75% {
+    z-index: 0;
+  }
+  100% {
+    transform: translateX(0px) scale(0.8);
+    z-index: 0;
+  }
+}
+
+@keyframes backSleeveForward {
+  0% {
+    transform: translateX(70px) scale(1);
+    z-index: 1;
+  }
+  50% {
+    transform: translateX(110px) scale(0.8);
+    z-index: 1;
+  }
+  75% {
+    z-index: 0;
+  }
+  100% {
+    transform: translateX(0px) scale(0.8);
+    z-index: 0;
   }
 }

@@ -6,6 +6,21 @@
   & i {
     font-size: 48px;
     padding: 20px;
+    cursor: pointer;
+  }
+}
+
+.fa-circle-play {
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  z-index: 2;
+  color: white;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+
+  &--disappear {
+    opacity: 0;
   }
 }
 
@@ -13,38 +28,76 @@
   display: flex;
   position: relative;
   height: 80%;
-  width: 390px;
+  width: 430px;
   gap: 10px;
 
   & img {
     height: 100%;
+    cursor: pointer;
   }
 
   &__zionSleeve {
     position: absolute;
     top: 0;
-    left: 30px;
-    z-index: 1;
+    @include filter-shadow;
+
+    &--backSleeveBackward {
+      animation: backSleeveBackward 500ms ease-in-out both;
+    }
+
+    &--frontSleeveBackward {
+      animation: frontSleeveBackward 500ms ease-in-out both;
+    }
+    &--backSleeveForward {
+      animation: backSleeveForward 500ms ease-in-out both;
+    }
+
+    &--frontSleeveForward {
+      animation: frontSleeveForward 500ms ease-in-out both;
+    }
   }
 
   &__dubatekSleeve {
     position: absolute;
     top: 0;
-    right: 180px;
-    transform: scale(0.8);
+    @include filter-shadow;
+
+    &--backSleeveBackward {
+      animation: backSleeveBackward 500ms ease-in-out both;
+    }
+
+    &--frontSleeveBackward {
+      animation: frontSleeveBackward 500ms ease-in-out both;
+    }
+
+    &--backSleeveForward {
+      animation: backSleeveForward 500ms ease-in-out both;
+    }
+
+    &--frontSleeveForward {
+      animation: frontSleeveForward 500ms ease-in-out both;
+    }
   }
 
   &__zionRecord {
     position: absolute;
     left: 30px;
+    opacity: 0;
+    @include filter-shadow;
 
     &--out {
-      animation: recordOutofSleeve 500ms ease-in-out both;
+      animation: recordAppear 100ms 500ms ease-in-out both, recordOutofSleeve 500ms 500ms ease-in-out both;
     }
   }
 
   &__dubatekRecord {
     position: absolute;
-    z-index: -1;
+    left: 30px;
+    opacity: 0;
+    @include filter-shadow;
+
+    &--out {
+      animation: recordAppear 100ms 500ms ease-in-out both, recordOutofSleeve 500ms 500ms ease-in-out both;
+    }
   }
 }
