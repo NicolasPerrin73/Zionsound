@@ -40,8 +40,10 @@ const Home = () => {
       ) : (
         ""
       )}
-      <button onClick={() => setSelectedQuality("low")}>Qualité faible</button>
-      <button onClick={() => setSelectedQuality("high")}>Qualité élevée</button>
+
+      {isLiveStreamActive ? <button onClick={() => setSelectedQuality("low")}>Qualité faible</button> : ""}
+
+      {isLiveStreamActive ? <button onClick={() => setSelectedQuality("high")}>Qualité élevée</button> : ""}
     </>
   );
 };

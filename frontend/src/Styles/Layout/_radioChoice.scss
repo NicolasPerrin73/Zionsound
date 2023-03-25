@@ -88,6 +88,15 @@
     &--out {
       animation: recordAppear 100ms 500ms ease-in-out both, recordOutofSleeve 500ms 500ms ease-in-out both;
     }
+
+    &--play {
+      opacity: 1;
+      animation: recordPlay 500ms ease-in-out both, recordSpinning 1818ms 500ms infinite linear;
+    }
+
+    &--stop {
+      animation: recordStop 400ms ease-in-out both;
+    }
   }
 
   &__dubatekRecord {
@@ -98,6 +107,15 @@
 
     &--out {
       animation: recordAppear 100ms 500ms ease-in-out both, recordOutofSleeve 500ms 500ms ease-in-out both;
+    }
+
+    &--play {
+      opacity: 1;
+      animation: recordPlay 500ms ease-in-out both, recordSpinning 1818ms 500ms infinite linear;
+    }
+
+    &--stop {
+      animation: recordStop 600ms ease-in-out both;
     }
   }
 }

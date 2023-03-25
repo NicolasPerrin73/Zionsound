@@ -4,7 +4,6 @@
   height: 250px;
   min-width: 320px;
   margin-right: 5px;
-  margin-top: 5px;
   overflow: hidden;
 
   &__turntable {
@@ -26,6 +25,10 @@
     left: 20px;
     top: 10px;
     height: 93%;
+
+    &--spinning {
+      animation: plateSpinning 1808ms linear 500ms infinite;
+    }
   }
 
   &__arm {
@@ -35,6 +38,15 @@
     height: 80%;
     transform-origin: 76% 21%;
     transform: rotate(-20deg);
+    z-index: 2;
+
+    &--playing {
+      animation: armPlaying 500ms ease-in both;
+    }
+
+    &--stopping {
+      animation: armStoping 500ms ease-in-out both;
+    }
 
     & img {
       height: 100%;
@@ -62,6 +74,6 @@
     position: absolute;
     left: 0;
     height: 100%;
-    z-index: 2;
+    z-index: 3;
   }
 }
