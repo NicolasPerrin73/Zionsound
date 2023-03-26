@@ -21,4 +21,30 @@ app.use((req, res, next) => {
 
 //Endpoint
 
+//shoutcast proxy
+
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
+app.use(
+  "/zion",
+  createProxyMiddleware({
+    target: "https://web.zionsound.fr:8002",
+    changeOrigin: true,
+    pathRewrite: { "^/zion": "/stats" },
+  })
+);
+
+app.use(
+  "/dubatek",
+  createProxyMiddleware({
+    target: "https://web.zionsound.fr:8012",
+    changeOrigin: true,
+    pathRewrite: { "^/dubatek": "/stats" },
+  })
+);
+
+app.listen(8090, () => {
+  console.log("Proxy server running on port 8090");
+});
+
 module.exports = app;

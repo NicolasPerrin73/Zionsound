@@ -148,6 +148,14 @@
     transform: rotate(-20deg);
   }
 }
+@keyframes textSlide {
+  0% {
+    transform: translateX(999px);
+  }
+  100% {
+    transform: translateX(-999px);
+  }
+}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -464,10 +472,13 @@ body {
 }
 
 header {
+  position: relative;
   background: linear-gradient(green, yellow, black);
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
   height: 300px;
   width: 100%;
 }
@@ -478,10 +489,23 @@ header {
   align-self: center;
 }
 
+.radio-container {
+  display: flex;
+  height: 100%;
+}
+
 .radio {
   display: flex;
   align-items: center;
   height: 100%;
+}
+
+.songTitle {
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  color: white;
+  font-size: 1.3rem;
 }
 
 .player {

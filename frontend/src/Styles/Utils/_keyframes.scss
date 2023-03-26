@@ -159,3 +159,12 @@
     transform: rotate(-20deg);
   }
 }
+
+@keyframes textSlide {
+  0% {
+    transform: translateX(999px);
+  }
+  100% {
+    transform: translateX(-999px);
+  }
+}

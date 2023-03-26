@@ -9,7 +9,6 @@ import arm from "../Assets/bras.png";
 const Player = ({ isRadionZionPlaying, setIsRadionZionPlaying, isDubatekPlaying, setIsDubatekPlaying, isStationChanging, setIsStationChanging }) => {
   const [isSpinning, setIsSpinning] = useState();
   const [armStatus, setArmStatus] = useState();
-  const [streamUrl, setStreamUrl] = useState("");
 
   useEffect(() => {
     if (isRadionZionPlaying === true || isDubatekPlaying === true) {
@@ -29,17 +28,6 @@ const Player = ({ isRadionZionPlaying, setIsRadionZionPlaying, isDubatekPlaying,
       }, 250);
     }
   }, [isStationChanging]);
-
-  function action() {
-    var sound = document.getElementById("audioplayer");
-
-    if (sound.paused) {
-      sound.load();
-      sound.play();
-    } else {
-      sound.pause();
-    }
-  }
 
   useEffect(() => {
     const radioZion = document.querySelector("#radioZion");
