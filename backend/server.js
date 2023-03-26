@@ -176,3 +176,13 @@ wss.on("connection", (ws) => {
   // Envoyer le message de statut de flux en direct au client nouvellement connecté
   ws.send(JSON.stringify({ isLiveStreamActive: liveStreamIsActive }));
 });
+
+//shoutcast proxy server https
+//web.zionsound.fr
+
+const keyPath2 = "/etc/letsencrypt/archive/web.zionsound.fr/privkey1.pem";
+const certPath2 = "/etc/letsencrypt/archive/web.zionsound.fr/cert1.pem";
+
+const proxy = https.createServer({ key: fs.readFileSync(keyPath2), cert: fs.readFileSync(certPath2) }, app);
+
+proxy.listen(8090, () => console.log("proxy https server listening 8090"));

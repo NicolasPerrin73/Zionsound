@@ -43,8 +43,4 @@ app.use(
   })
 );
 
-app.listen(8090, () => {
-  console.log("Proxy server running on port 8090");
-});
-
 module.exports = app;

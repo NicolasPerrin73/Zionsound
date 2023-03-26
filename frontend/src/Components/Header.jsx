@@ -15,12 +15,12 @@ const Header = () => {
       redirect: "follow",
     };
     const fetchSongTitles = () => {
-      fetch("http://web.zionsound.fr:8090/zion?sid=1&json=1", requestOptions)
+      fetch("https://web.zionsound.fr:8090/zion?sid=1&json=1", requestOptions)
         .then((response) => response.json())
         .then((data) => setZionSongTitle(data.songtitle))
         .catch((error) => console.log("error", error));
 
-      fetch("http://web.zionsound.fr:8090/dubatek?sid=1&json=1", requestOptions)
+      fetch("https://web.zionsound.fr:8090/dubatek?sid=1&json=1", requestOptions)
         .then((response) => response.json())
         .then((data) => setDubatekSongTitle(data.songtitle))
         .catch((error) => console.log("error", error));
