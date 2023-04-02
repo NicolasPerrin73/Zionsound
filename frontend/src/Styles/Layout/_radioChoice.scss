@@ -7,20 +7,7 @@
     font-size: 48px;
     padding: 20px;
     cursor: pointer;
-  }
-}
-
-.fa-circle-play {
-  position: absolute;
-  top: 30%;
-  left: 35%;
-  z-index: 2;
-  color: white;
-  opacity: 1;
-  transition: opacity 250ms ease-in-out;
-
-  &--disappear {
-    opacity: 0;
+    color: black;
   }
 }
 
@@ -116,6 +103,24 @@
 
     &--stop {
       animation: recordStop 600ms ease-in-out both;
+    }
+  }
+
+  &__playStop {
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 250ms ease-in-out;
+
+    & i {
+      color: white !important;
+      position: absolute;
+      top: 30%;
+      left: 35%;
+      @include filter-shadow;
+    }
+
+    &--disappear {
+      opacity: 0;
     }
   }
 }

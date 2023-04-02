@@ -10,30 +10,32 @@ const Header = () => {
   const [dubatekSongTitle, setDubatekSongTitle] = useState("");
 
   useEffect(() => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-    const fetchSongTitles = () => {
-      fetch("https://web.zionsound.fr:8090/zion?sid=1&json=1", requestOptions)
-        .then((response) => response.json())
-        .then((data) => setZionSongTitle(data.songtitle))
-        .catch((error) => console.log("error", error));
+    if (isRadionZionPlaying === true || isDubatekPlaying === true) {
+      const requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+      const fetchSongTitles = () => {
+        fetch("https://web.zionsound.fr:8090/zion?sid=1&json=1", requestOptions)
+          .then((response) => response.json())
+          .then((data) => setZionSongTitle(data.songtitle))
+          .catch((error) => console.log("error", error));
 
-      fetch("https://web.zionsound.fr:8090/dubatek?sid=1&json=1", requestOptions)
-        .then((response) => response.json())
-        .then((data) => setDubatekSongTitle(data.songtitle))
-        .catch((error) => console.log("error", error));
-    };
+        fetch("https://web.zionsound.fr:8090/dubatek?sid=1&json=1", requestOptions)
+          .then((response) => response.json())
+          .then((data) => setDubatekSongTitle(data.songtitle))
+          .catch((error) => console.log("error", error));
+      };
 
-    fetchSongTitles();
-
-    const interval = setInterval(() => {
       fetchSongTitles();
-    }, 10000);
 
-    return () => clearInterval(interval);
-  }, []);
+      const interval = setInterval(() => {
+        fetchSongTitles();
+      }, 10000);
+
+      return () => clearInterval(interval);
+    }
+  }, [isDubatekPlaying, isRadionZionPlaying]);
 
   return (
     <>

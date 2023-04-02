@@ -1,6 +1,7 @@
 import Header from "../Components/Header";
 import ReactPlayer from "react-player/file";
 import { useEffect, useState } from "react";
+import Chat from "../Components/Chat";
 
 const Home = () => {
   const [isLiveStreamActive, setIsLiveStreamActive] = useState(true);
@@ -9,15 +10,15 @@ const Home = () => {
   useEffect(() => {
     const ws = new WebSocket("wss://zionsound.fr:8085");
     ws.addEventListener("open", function (event) {
-      console.log("WebSocket connecté");
+      console.log("WebSocket NodeMediaServer status connecté");
     });
 
     ws.addEventListener("close", function (event) {
-      console.log("WebSocket fermé");
+      console.log("WebSocket NodeMediaServer status fermé");
     });
 
     ws.addEventListener("error", function (event) {
-      console.error("WebSocket erreur:", event);
+      console.error("WebSocket NodeMediaServer status erreur:", event);
     });
     ws.addEventListener("message", (event) => {
       const data = JSON.parse(event.data);
@@ -44,6 +45,8 @@ const Home = () => {
       {isLiveStreamActive ? <button onClick={() => setSelectedQuality("low")}>Qualité faible</button> : ""}
 
       {isLiveStreamActive ? <button onClick={() => setSelectedQuality("high")}>Qualité élevée</button> : ""}
+
+      <Chat />
     </>
   );
 };

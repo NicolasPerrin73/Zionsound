@@ -12,6 +12,7 @@ const RadioChoice = ({ isRadionZionPlaying, setIsRadionZionPlaying, isDubatekPla
   const [displayPlayButton, setdisplayPlaybutton] = useState("");
   const [radioZionRecordPlay, setRadioZionRecordPlay] = useState();
   const [dubatekRecordPlay, setDubatekRecordPlay] = useState();
+  const [playStopButton, setPlayStopbutton] = useState("fa-solid fa-circle-play");
 
   const backward = (e) => {
     if (backwardClick === false) {
@@ -93,6 +94,7 @@ const RadioChoice = ({ isRadionZionPlaying, setIsRadionZionPlaying, isDubatekPla
       setTimeout(() => {
         setIsStationChanging(false);
       }, 500);
+      setPlayStopbutton("fa-solid fa-circle-play");
     } else if (isRadionZionPlaying === true && (dubatekSleevePosition === "--frontSleeveBackward" || dubatekSleevePosition === "--frontSleeveForward")) {
       setRadioZionRecordPlay("collection__zionRecord--stop");
       setTimeout(() => {
@@ -105,26 +107,31 @@ const RadioChoice = ({ isRadionZionPlaying, setIsRadionZionPlaying, isDubatekPla
       setTimeout(() => {
         setIsStationChanging(false);
       }, 500);
+      setPlayStopbutton("fa-solid fa-circle-play");
     } else if (isRadionZionPlaying === true && (radioZionSleevePosition === "--frontSleeveBackward" || radioZionSleevePosition === "--frontSleeveForward")) {
       setRadioZionRecordPlay("collection__zionRecord--stop");
       setTimeout(() => {
         setRadioZionRecordPlay("");
       }, 400);
       setIsRadionZionPlaying(false);
+      setPlayStopbutton("fa-solid fa-circle-stop");
     } else if (isRadionZionPlaying === false && (radioZionSleevePosition === "--frontSleeveBackward" || radioZionSleevePosition === "--frontSleeveForward")) {
       setIsRadionZionPlaying(true);
       setIsDubatekPlaying(false);
       setRadioZionRecordPlay("collection__zionRecord--play");
+      setPlayStopbutton("fa-solid fa-circle-play");
     } else if (isDubatekPlaying === true && (dubatekSleevePosition === "--frontSleeveBackward" || dubatekSleevePosition === "--frontSleeveForward")) {
       setDubatekRecordPlay("collection__dubatekRecord--stop");
       setTimeout(() => {
         setDubatekRecordPlay("");
       }, 400);
       setIsDubatekPlaying(false);
+      setPlayStopbutton("fa-solid fa-circle-stop");
     } else if (isDubatekPlaying === false && (dubatekSleevePosition === "--frontSleeveBackward" || dubatekSleevePosition === "--frontSleeveForward")) {
       setIsDubatekPlaying(true);
       setIsRadionZionPlaying(false);
       setDubatekRecordPlay("collection__dubatekRecord--play");
+      setPlayStopbutton("fa-solid fa-circle-play");
     }
   };
 
@@ -135,6 +142,22 @@ const RadioChoice = ({ isRadionZionPlaying, setIsRadionZionPlaying, isDubatekPla
       setDubatekRecordPlay("collection__dubatekRecord--play");
     }
   }, [isDubatekPlaying, isRadionZionPlaying]);
+
+  useEffect(() => {
+    if (isDubatekPlaying === true && (radioZionSleevePosition === "--frontSleeveBackward" || radioZionSleevePosition === "--frontSleeveForward")) {
+      setPlayStopbutton("fa-solid fa-circle-play");
+    } else if (isRadionZionPlaying === true && (dubatekSleevePosition === "--frontSleeveBackward" || dubatekSleevePosition === "--frontSleeveForward")) {
+      setPlayStopbutton("fa-solid fa-circle-play");
+    } else if (isRadionZionPlaying === true && (radioZionSleevePosition === "--frontSleeveBackward" || radioZionSleevePosition === "--frontSleeveForward")) {
+      setPlayStopbutton("fa-solid fa-circle-stop");
+    } else if (isRadionZionPlaying === false && (radioZionSleevePosition === "--frontSleeveBackward" || radioZionSleevePosition === "--frontSleeveForward")) {
+      setPlayStopbutton("fa-solid fa-circle-play");
+    } else if (isDubatekPlaying === true && (dubatekSleevePosition === "--frontSleeveBackward" || dubatekSleevePosition === "--frontSleeveForward")) {
+      setPlayStopbutton("fa-solid fa-circle-stop");
+    } else if (isDubatekPlaying === false && (dubatekSleevePosition === "--frontSleeveBackward" || dubatekSleevePosition === "--frontSleeveForward")) {
+      setPlayStopbutton("fa-solid fa-circle-play");
+    }
+  }, [dubatekSleevePosition, isDubatekPlaying, isRadionZionPlaying, radioZionSleevePosition]);
 
   return (
     <div className="radioChoice">
@@ -173,7 +196,9 @@ const RadioChoice = ({ isRadionZionPlaying, setIsRadionZionPlaying, isDubatekPla
           <img src={dubatekRecord} alt="vinyl de radio dubatek" id="dubatekRecord" className={"collection__dubatekRecord " + dubatekRecordPlay} />
         )}
 
-        <i className={"fa-solid fa-circle-play" + displayPlayButton}></i>
+        <div className="collection__playStop">
+          <i className={playStopButton + displayPlayButton}></i>
+        </div>
       </div>
       <i
         className="fa-solid fa-forward-step"
